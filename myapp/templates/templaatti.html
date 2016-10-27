@@ -1,0 +1,31 @@
+<html>
+<head>
+    <style>
+        @font-face {
+            font-family: PlanetEstyle;
+            src: "./planet_estyle/PLANE___.TTF";
+        }
+        body { background-color: #008542; }
+        div { font-family: "PlanetEstyle", "Comic sans", "Arial";
+              font-size: 30px; color: white; 
+              width: 40%; height: 9%;
+              float: left; display: inline-block; 
+              border-bottom: solid; margin-right: 50px
+              }
+    </style>
+</head>
+    <body>
+        <table>
+            {% for event in events %}
+                <div>{{event.summary}}:</div>
+                {% if event.endpm %}
+                    <div> {{ event.start.parsed }} ... {{ event.endpm }}</div>
+                {% else %}
+                    <div> {{ event.start.parsed }} </div>
+                {% endif %}
+                <br>
+                
+            {% endfor %}
+        </table>
+    </body>
+</html>
