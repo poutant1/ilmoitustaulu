@@ -19,5 +19,5 @@ from myapp.views import myfunc
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^/calendar$', myfunc),
+    url(r'^calendar$', myfunc),
 ]
