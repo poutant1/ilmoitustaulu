@@ -20,7 +20,7 @@
     <body>
         <table>
             {% for event in events %}
-                <div>{{event.summary}}:</div>
+                <div>{{event.summary}}</div>
                 {% if event.endpm %}
                     <div> {{ event.start.parsed }} to {{ event.endpm }}</div>
                 {% else %}
