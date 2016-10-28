@@ -74,7 +74,12 @@ def get_calendar():
             events[i]['end']['parsed'] = parser.parse(events[i]['end']['dateTime'])
             events[i]['endpm'] = events[i]['end']['parsed'].time()
         else:
-            events[i]['start']['parsed'] = "Whole day"#parser.parse(events[i]['start']['date'])
+            events[i]['start']['parsed'] = parser.parse(events[i]['start']['date'])
+            events[i]['end']['parsed'] = parser.parse(events[i]['end']['date'])
+            if (events[i]['end']['parsed'] - events[i]['start']['parsed']) \
+                <= datetime.timedelta(days=1):
+                events[i]['end'].pop('parsed')
+                
 	
 	
 	
