@@ -23,8 +23,10 @@
                 <div>{{event.summary}}</div>
                 {% if event.endpm %}
                     <div> {{ event.start.parsed }} to {{ event.endpm }}</div>
+                {% elif event.end.parsed.date %}
+                    <div> {{ event.start.parsed.date }} to {{ event.end.parsed.date }}</div>
                 {% else %}
-                    <div> {{ event.start.parsed.date }} </div>
+                    <div> {{ event.start.parsed.date }}</div>
                 {% endif %}
             {% endfor %}
         </table>
