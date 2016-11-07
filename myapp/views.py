@@ -72,7 +72,7 @@ def get_calendar():
         if 'dateTime' in events[i]['start']:
             events[i]['start']['parsed'] = parser.parse(events[i]['start']['dateTime'])
             events[i]['end']['parsed'] = parser.parse(events[i]['end']['dateTime'])
-            events[i]['endpm'] = events[i]['end']['parsed'].time()
+            events[i]['endpm'] = events[i]['end']['parsed'].time() + datetime.timedelta(hours=3)
         else:
             events[i]['start']['parsed'] = parser.parse(events[i]['start']['date'])
             events[i]['end']['parsed'] = parser.parse(events[i]['end']['date'])
