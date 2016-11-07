@@ -9,7 +9,7 @@
         body { background-color: white; }
         div { background-color: #008542;
               font-family: "PlanetEstyle", "Arial";
-              font-size: 35px; color: white; 
+              font-size: 30px; color: white; 
               width: 49%; height: 8.5%;
               float: left; display: inline-block; 
               padding-top: 1%; padding-left: 0.5%;
@@ -23,7 +23,7 @@
             {% for event in events %}
                 <div>{{event.summary}}</div>
                 {% if event.endpm %}
-                    <div> {{ event.start.parsed }} to {{ event.endpm }}</div>
+                    <div> {{ event.start.parsed.date }} {{ event.start.parsed.time }} to {{ event.endpm.time }}</div>
                 {% elif event.end.parsed.date %}
                     <div> {{ event.start.parsed.date }} to {{ event.end.parsed.date }}</div>
                 {% else %}

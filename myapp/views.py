@@ -12,6 +12,7 @@ from oauth2client import tools
 from django.utils import timezone
 
 import datetime
+import pytz
 
 # Create your views here.
 
@@ -59,7 +60,7 @@ def get_calendar():
     http = credentials.authorize(http)
     service = discovery.build('calendar', 'v3', http=http)
 
-    now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
+    now = datetime.datetime.now().isoformat() + 'Z' # 'Z' indicates UTC time
     print('Getting the upcoming 10 events')
     eventsResult = service.events().list(
     calendarId='p4r635n487mr7u9cje9n6985e0@group.calendar.google.com', timeMin=now, maxResults=10, singleEvents=True,
@@ -70,9 +71,11 @@ def get_calendar():
     for i in range(len(events)):
         events[i] = dict((key,value) for key, value in events[i].items() if key in keys)
         if 'dateTime' in events[i]['start']:
+            print(events[i]['start'], "\n")
             events[i]['start']['parsed'] = parser.parse(events[i]['start']['dateTime'])
             events[i]['end']['parsed'] = parser.parse(events[i]['end']['dateTime'])
-            events[i]['endpm'] = events[i]['end']['parsed'].time() + datetime.timedelta(hours=3)
+            events[i]['endpm'] = events[i]['end']['parsed']
+            print(events[i]['start']['parsed'], '\n\n')
         else:
             events[i]['start']['parsed'] = parser.parse(events[i]['start']['date'])
             events[i]['end']['parsed'] = parser.parse(events[i]['end']['date'])
