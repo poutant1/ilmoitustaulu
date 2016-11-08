@@ -63,7 +63,7 @@ def get_calendar():
     now = datetime.datetime.now().isoformat() + 'Z' # 'Z' indicates UTC time
     print('Getting the upcoming 10 events')
     eventsResult = service.events().list(
-    calendarId='p4r635n487mr7u9cje9n6985e0@group.calendar.google.com', timeMin=now, maxResults=10, singleEvents=True,
+    calendarId='p4r635n487mr7u9cje9n6985e0@group.calendar.google.com', timeMin=now, maxResults=12, singleEvents=True,
     orderBy='startTime').execute()
     events = eventsResult.get('items', [])
     keys = ['summary', 'start', 'end']
@@ -75,15 +75,14 @@ def get_calendar():
             events[i]['start']['parsed'] = parser.parse(events[i]['start']['dateTime'])
             events[i]['end']['parsed'] = parser.parse(events[i]['end']['dateTime'])
             events[i]['endpm'] = events[i]['end']['parsed']
-            print(events[i]['start']['parsed'], '\n\n')
         else:
             events[i]['start']['parsed'] = parser.parse(events[i]['start']['date'])
             events[i]['end']['parsed'] = parser.parse(events[i]['end']['date'])
-            if (events[i]['end']['parsed'] - events[i]['start']['parsed']) \
-                <= datetime.timedelta(days=1):
-                events[i]['end'].pop('parsed')
-                
-	
+        if (events[i]['end']['parsed'] - events[i]['start']['parsed']) \
+            >= datetime.timedelta(days=1):
+            events[i]['multiDay'] = True
+        else:
+            events[i]['multiDay'] = False
 	
 	
     return events
