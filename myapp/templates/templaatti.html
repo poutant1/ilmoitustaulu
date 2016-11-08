@@ -25,8 +25,8 @@
                 {% if event.multiDay %}
                     <div> {{ event.start.parsed.date }} to {{ event.end.parsed.date }} </div>
                 {% elif event.endpm %}
-                    <div> {{ event.start.parsed.date }} {{ event.start.parsed.time }}
-                            to {{ event.end.parsed.time }} </div>
+                    <div> {{ event.start.parsed|date:"D d G"}}
+                            to {{ event.end.parsed|date:"G" }} </div>
                 {% else %}
                     <div> {{ event.start.parsed.date }}</div>
                 {% endif %}
