@@ -9,12 +9,13 @@
         body { background-color: white; }
         div { background-color: #008542;
               font-family: "PlanetEstyle", "Arial";
-              font-size: 3.5vh; color: white; 
+              font-size: 3vw; color: white; 
               width: 49%; height: 8.5%;
               float: left; display: inline-block; 
               padding-top: 1%; padding-left: 0.5%;
               margin-right: 0.5%;
-              border-bottom: solid
+              border-bottom: solid;
+              text-align: justify
               }
     </style>
 </head>
@@ -25,7 +26,7 @@
                 {% if event.multiDay %}
                     <div> {{ event.start.parsed.date }} to {{ event.end.parsed.date }} </div>
                 {% elif event.endpm %}
-                    <div> {{ event.start.parsed|date:"D d G"}}
+                    <div> {{ event.start.parsed|date:"D j M"}} from {{ event.start.parsed|date:"G"}}
                             to {{ event.end.parsed|date:"G" }} </div>
                 {% else %}
                     <div> {{ event.start.parsed.date }}</div>
